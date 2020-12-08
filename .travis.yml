@@ -57,7 +57,7 @@ jobs:
   include:
     - script: pod lib lint --verbose --allow-warnings
     - stage: deploy
-      before_deploy: carthage build --no-skip-current && carthage archive RxCoreLocation
+      before_deploy: ./carthage.sh build --no-skip-current && ./carthage.sh archive RxCoreLocation
       deploy:
         - provider: releases
           api_key:

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
  s.name = 'RxCoreLocation'
- s.version = '1.5.0'
+ s.version = '2.0.0-rc.2'
  s.license = { :type => "MIT", :file => "LICENSE" }
  s.summary = 'RxCoreLocation abstract the Rx behavior for Core Location'
  s.homepage = 'http://github.com/RxSwiftCommunity/RxCoreLocation'
@@ -17,8 +17,8 @@ Pod::Spec.new do |s|
  s.subspec "Core" do |ss|
      ss.source_files  = "Sources/*.swift"
      ss.framework  = "Foundation"
-     ss.dependency "RxSwift", "~> 5.1"
-     ss.dependency "RxCocoa", "~> 5.1"
+     ss.dependency "RxSwift", "~> 6.0.0-rc"
+     ss.dependency "RxCocoa", "~> 6.0.0-rc"
  end
 
 end
