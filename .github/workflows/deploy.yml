@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - 2.*
+
+jobs:
+  tests:
+    runs-on: macos-11.0
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/cache@v2
+      with:
+        path: Carthage
+        key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-carthage-
+
+    - name: Carthage Bootstrap
+      run: ./carthage.sh bootstrap --cache-builds --no-use-binaries --platform ios
+
+    - name: Run all tests
+      run: xcodebuild clean build test -scheme 'RxCoreLocation iOS' -destination "platform=iOS Simulator,name=iPhone 11" -enableCodeCoverage YES
+
+    - name: CodeCov
+      run: bash <(curl -s https://codecov.io/bash) -J 'RxCoreLocation'
+  
+  deploy:
+    runs-on: macos-11.0
+    needs: tests
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/cache@v2
+      with:
+        path: Carthage
+        key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-carthage-
+
+    - name: Build
+      run: ./carthage.sh build --no-skip-current --platform ios
+    
+    - name: Archive
+      run: ./carthage.sh archive RxCoreLocation
+    
+    - name: Release
+      uses: yakuhzi/action-release@v1.2.0
+      with:
+        file: RxCoreLocation.framework.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
