@@ -23,7 +23,7 @@ jobs:
       run: ./carthage.sh bootstrap --cache-builds --no-use-binaries --platform ios
 
     - name: Run all tests
-      run: xcodebuild clean build test -scheme 'RxCoreLocation iOS' -destination "platform=iOS Simulator,name=iPhone 11" -enableCodeCoverage YES
+      run: xcodebuild clean build test -project 'RxCoreLocation.xcodeproj' -scheme 'RxCoreLocation-iOS' -destination "platform=iOS Simulator,name=iPhone 11" -enableCodeCoverage YES
 
     - name: CodeCov
       run: bash <(curl -s https://codecov.io/bash) -J 'RxCoreLocation'
