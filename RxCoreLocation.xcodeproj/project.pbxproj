@@ -13,8 +13,6 @@
 		3549BB531DA38A2200C63030 /* RxCoreLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3549BB181DA3890B00C63030 /* RxCoreLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3549BB661DA38ADB00C63030 /* RxCoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3549BB211DA389CD00C63030 /* RxCoreLocation.framework */; };
 		3549BB8B1DA38C0A00C63030 /* RxCoreLocationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3549BB8A1DA38C0A00C63030 /* RxCoreLocationSpec.swift */; };
-		35B7422F1F82A5E000829B21 /* Nimble.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7422D1F82A5DF00829B21 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		35B742301F82A5E000829B21 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7422E1F82A5E000829B21 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		35B742311F82A5EC00829B21 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7422D1F82A5DF00829B21 /* Nimble.framework */; };
 		35B742321F82A5EC00829B21 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7422E1F82A5E000829B21 /* Quick.framework */; };
 		A85013AF204F093C00094A90 /* RxKeyPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85013AE204F093C00094A90 /* RxKeyPaths.swift */; };
@@ -70,21 +68,6 @@
 			remoteInfo = "RxCoreLocation-iOS";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		35B7422C1F82A2C700829B21 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				35B7422F1F82A5E000829B21 /* Nimble.framework in Embed Frameworks */,
-				35B742301F82A5E000829B21 /* Quick.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3549BB171DA3890B00C63030 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -396,8 +379,7 @@
 			buildPhases = (
 				3549BB5D1DA38ADB00C63030 /* Sources */,
 				3549BB5E1DA38ADB00C63030 /* Frameworks */,
-				3549BB5F1DA38ADB00C63030 /* Resources */,
-				35B7422C1F82A2C700829B21 /* Embed Frameworks */,
+				53E20AB82592D5F3001F025F /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -497,14 +479,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3549BB5F1DA38ADB00C63030 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		53E20AB82592D5F3001F025F /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				Nimble.framework,
+				Quick.framework,
+				RxSwift.framework,
+			);
+			name = "Copy Carthage Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"\n";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3549BB1C1DA389CD00C63030 /* Sources */ = {
